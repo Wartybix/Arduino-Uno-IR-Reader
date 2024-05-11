@@ -82,8 +82,15 @@ void loop(void) {
 }
  
 void printpulses(void) {
+  Serial.print("Enter starting line number in Kotlin file: ");
+  while (Serial.available() == 0) {}
+  int startingLine = Serial.parseInt();
+  Serial.read(); //Clear buffer after reading integer
+  Serial.println(startingLine);
   Serial.println("\n\r\n\rReceived: \n\rOFF \tON");
   for (uint8_t i = 0; i < currentpulse; i++) {
+    Serial.print(i + startingLine);
+    Serial.print(" - ");
     Serial.print(pulses[i][0] * RESOLUTION, DEC);
     Serial.print(" usec, ");
     Serial.print(pulses[i][1] * RESOLUTION, DEC);
